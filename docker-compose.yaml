@@ -1,0 +1,68 @@
+name: notes-tracker
+
+services:
+  notes-tracker-dev:
+    restart: always
+    image: notes-tracker-dev:1.0.1
+    container_name: notes-tracker-dev
+    env_file:
+      - .env
+      - .development.env
+    working_dir: /home/source_code/notes-tracker
+    entrypoint:
+      - /bin/bash
+      - -c
+      - python3 manage.py runserver 0.0.0.0:8090
+    ports:
+      - "8090:8090"
+    volumes:
+        - .:/home/source_code/notes-tracker
+    networks:
+      archiver-network:
+        ipv4_address: ${NOTES_TRACKER_IP}
+    depends_on:
+        - "pgbouncer-notes-tracker"
+  
+  pgbouncer-notes-tracker:
+    restart: always
+    image: bitnami/pgbouncer:latest
+    container_name: pgbouncer-notes-tracker
+    env_file:
+      - .env
+      - .pgbouncer.env
+    environment:
+      - POSTGRESQL_HOST=$POSTGRES_NOTES_TRACKER_IP
+      - POSTGRESQL_PORT=$POSTGRES_NOTES_TRACKER_PORT
+      - POSTGRESQL_DBNAME=$POSTGRES_NOTES_TRACKER_DB
+      - POSTGRESQL_USERNAME=$POSTGRES_NOTES_TRACKER_USER
+      - POSTGRESQL_PASSWORD=$POSTGRES_NOTES_TRACKER_PASSWORD
+      - PGBOUNCER_DATABASE=$POSTGRES_NOTES_TRACKER_DB
+    networks:
+      archiver-network:
+        ipv4_address: ${PGBOUNCER_NOTES_TRACKER_IP}
+    depends_on:
+        - "postgres-notes-tracker"
+  
+    
+  postgres-notes-tracker:
+    restart: always
+    image: postgres-notes-tracker:1.0.1
+    container_name: postgres-notes-tracker
+    user: postgres
+    env_file:
+      - .env
+  #  entrypoint: postgres -c 'config_file=/etc/postgresql.conf'
+    volumes:
+      - postgres-notes-tracker-volume:/var/lib/postgresql/data
+    networks:
+      archiver-network:
+        ipv4_address: ${POSTGRES_NOTES_TRACKER_IP}
+    
+networks:
+  archiver-network:
+    name: archiver-network
+    external: true
+
+volumes:
+    postgres-notes-tracker-volume:
+        external: true

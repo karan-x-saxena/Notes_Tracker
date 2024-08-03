@@ -1,0 +1,1056 @@
+{% load static %}
+{% block body %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>NotePlus | Responsive Bootstrap 4 Admin Dashboard Template</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/backend-plugin.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/backend.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/remixicon/fonts/remixicon.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/@icon/dripicons/dripicons.css' %}">
+    <script src="{% static 'assets/js/formCache.js' %}"></script>
+    <script>
+        // Pass the static URL to JavaScript
+        const staticURL = "{% static 'assets/images/' %}";
+    </script>
+    <style>
+        .half-width {
+            width: 80%;
+        }
+
+    </style>
+</head>
+
+<body class="noteplus-layout  ">
+    <!-- loader Start -->
+    <div id="loading">
+        <div id="loading-center">
+        </div>
+    </div>
+    <div class="right-sidebar-mini right-sidebar">
+        <div class="right-sidebar-panel p-0">
+            <div class="right-sidebar-toggle bg-primary mt-3" data-extra-toggle="right-sidebar-dissmiss">
+                <i class="ri-arrow-left-line side-left-icon"></i>
+                <i class="ri-close-fill side-right-icon"></i>
+            </div>
+            <div class="card shadow-none tag-details mb-0">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title mb-0">Tag List</h4>
+                    </div>
+                    <div>
+                        <a href="#" data-toggle="modal" data-target="#create-note"><i
+                                class="ri-add-line font-size-20"></i></a>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-inline p-3 m-0 pb-0">
+                        <li class="mb-3 px-2">
+                            <div class="item d-flex align-items-center justify-content-between pb-3 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-success">A</div>
+                                    <h5>Afternoon</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton1"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton1" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mb-3 px-2">
+                            <div class="item d-flex align-items-center justify-content-between pb-3 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-danger">B</div>
+                                    <h5>Book</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton2"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton2" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mb-3 px-2">
+                            <div class="item d-flex align-items-center justify-content-between pb-3 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-purple">C</div>
+                                    <h5>Cupcake</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton3"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton3" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mb-3 px-2">
+                            <div class="item d-flex align-items-center justify-content-between pb-3 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-info">D</div>
+                                    <h5>Dinner</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton4"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton4" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mb-3 px-2">
+                            <div class="item d-flex align-items-center justify-content-between pb-3 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-warning">E</div>
+                                    <h5>Evening Snacks</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton5"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton5" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mb-3 px-2">
+                            <div class="item d-flex align-items-center justify-content-between pb-3 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-success">F</div>
+                                    <h5>Fast Track</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton6"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton6" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mb-3 px-2">
+                            <div class="item d-flex align-items-center justify-content-between pb-3 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-danger">G</div>
+                                    <h5>Good Morning</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton7"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton7" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mb-3 px-2">
+                            <div class="item d-flex align-items-center justify-content-between pb-3 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-info">H</div>
+                                    <h5>Health</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton8"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton8" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mb-3 px-2">
+                            <div class="item d-flex align-items-center justify-content-between pb-3 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-warning">I</div>
+                                    <h5>Ice Cream</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton9"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton9" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mb-3 px-2">
+                            <div class="item d-flex align-items-center justify-content-between pb-3 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-success">J</div>
+                                    <h5>Juice</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton10"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton10" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mb-3 px-2">
+                            <div class="item d-flex align-items-center justify-content-between pb-3 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-danger">K</div>
+                                    <h5>Kangaroo</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton11"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton11" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mb-3 px-2">
+                            <div class="item d-flex align-items-center justify-content-between pb-3 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-purple">L</div>
+                                    <h5>Leaves</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton12"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton12" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mb-3 px-2">
+                            <div class="item d-flex align-items-center justify-content-between pb-3 border-bottom">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-info">M</div>
+                                    <h5>Machine</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton13"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton13" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="px-2">
+                            <div class="item d-flex align-items-center justify-content-between">
+                                <div class="media align-items-center">
+                                    <div class="icon icon-btn icon-btn-warning">N</div>
+                                    <h5>Nail Polish</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <span class="dropdown-toggle dropdown-bg" id="tag-dropdownMenuButton14"
+                                        data-toggle="dropdown" aria-expanded="false" role="button">
+                                        <i class="ri-more-fill"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                        aria-labelledby="tag-dropdownMenuButton14" style="">
+                                        <a class="dropdown-item" data-toggle="modal" data-target="#tag-rename"
+                                            href="#"><i class="las la-pen mr-3"></i>Rename</a>
+                                        <a class="dropdown-item" data-extra-toggle="delete" data-closest-elem=".item"
+                                            href="#"><i class="las la-trash-alt mr-3"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="create-note" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="popup text-left">
+                        <h4 class="mb-4">Create New Tag</h4>
+                        <div class="content create-workform">
+                            <input type="text" class="form-control" placeholder="Enter Tag Name">
+                            <div class="col-lg-12 mt-4">
+                                <div class="d-flex flex-wrap align-items-ceter justify-content-center">
+                                    <div class="btn btn-outline-primary mr-4" data-dismiss="modal">Create</div>
+                                    <div class="btn btn-primary" data-dismiss="modal">Cancel</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="tag-rename" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="popup text-left">
+                        <h4 class="mb-4">Rename Your Tag</h4>
+                        <div class="content create-workform">
+                            <input type="text" class="form-control" placeholder="Enter Tag Name">
+                            <div class="col-lg-12 mt-4">
+                                <div class="d-flex flex-wrap align-items-ceter justify-content-center">
+                                    <div class="btn btn-primary mr-4" data-dismiss="modal">Cancel</div>
+                                    <div class="btn btn-outline-primary" data-dismiss="modal">Save</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- loader END -->
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+        <div class="iq-top-navbar">
+            <div class="iq-navbar-custom">
+                <nav class="navbar navbar-expand-lg navbar-light p-0">
+                    <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
+                        <i class="ri-menu-line wrapper-menu"></i>
+                        <a href="../backend/index.html" class="header-logo">
+                            <img src="{% static 'assets/images/logo.png' %}" class="img-fluid rounded-normal light-logo"
+                                alt="logo">
+
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-label="Toggle navigation">
+                            <i class="ri-menu-3-line"></i>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                                <li class="nav-item nav-icon search-content">
+                                    <a href="#" class="search-toggle rounded" id="h1-dropdownSearch"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="ri-search-line"></i>
+                                    </a>
+                                    <div class="iq-search-bar iq-sub-dropdown dropdown-menu"
+                                        aria-labelledby="h1-dropdownSearch">
+                                        <form action="#" class="searchbox p-2">
+                                            <div class="form-group mb-0 position-relative">
+                                                <input type="text" class="text search-input font-size-12"
+                                                    placeholder="type here to search...">
+                                                <a href="#" class="search-link"><i class="las la-search"></i></a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </li>
+                                <li class="caption-content">
+                                    <a href="#" class="iq-user-toggle d-flex align-items-center justify-content-between"
+                                        id="h-dropdownMenuButton001" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <div class="caption">
+                                            <h6 class="mb-0 line-height" id="username">{{ username }}</h6>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right w-100 border-0 py-2"
+                                        aria-labelledby="h-dropdownMenuButton001">
+                                        <a class="dropdown-item" href="../backend/index.html">
+                                            <i class="las la-sign-out-alt font-size-20 mr-1"></i>
+                                            <span>Logout</span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="iq-sidebar  sidebar-default ">
+            <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
+                <a href="../backend/index.html" class="header-logo">
+                    <img src="{% static 'assets/images/logo.png' %}" class="img-fluid rounded-normal light-logo"
+                        alt="logo">
+                    <h4 class="logo-title ml-3">NotePlus</h4>
+                </a>
+                <div class="iq-menu-bt-sidebar">
+                    <i class="las la-times wrapper-menu"></i>
+                </div>
+            </div>
+            <div class="sidebar-caption dropdown">
+                <a href="#" class="iq-user-toggle d-flex align-items-center justify-content-between"
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="caption">
+                        <h6 class="mb-0 line-height" id="username">{{ username }}</h6>
+                    </div>
+                    <i class="las la-angle-down"></i>
+                </a>
+                <div class="dropdown-menu w-100 border-0 my-2" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="../backend/auth-sign-in.html">
+                        <i class="las la-sign-out-alt font-size-20 mr-1"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+            <div class="data-scrollbar" data-scroll="1">
+                <div class="iq-search-bar device-search mb-3">
+                    <form action="#" class="searchbox">
+                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>
+                        <input type="text" class="text search-input" placeholder="Search">
+                    </form>
+                </div>
+                <div class="iq-search-bar device-search mb-3">
+                    <button id="previous-title" type="button" class="btn btn-primary btn-block">Previous Folder</button>
+                </div>
+                <nav class="iq-sidebar-menu">
+                    <ul id="iq-sidebar-toggle" id="notes-title" class="iq-menu">
+                        <li class="">
+                            <a href="#notebooks" id="main-titles" class="collapsed svg-icon" data-toggle="collapse"
+                                aria-expanded="false">
+                                <i>
+                                    <svg width="20" class="svg-icon" id="iq-main-2" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
+                                    </svg>
+                                </i>
+                                <span>Notebooks</span>
+                                <i class="las la-angle-right iq-arrow-right arrow-active"></i>
+                                <i class="las la-angle-down iq-arrow-right arrow-hover"></i>
+
+                            </a>
+                            <ul id="notebooks" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                                <li class="">
+                                    <a href="" class="svg-icon">
+                                        <i>
+                                            <svg width="20" class="svg-icon" id="iq-main-3"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                                            </svg>
+                                        </i>
+                                        <span>Project Plans</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="../backend/page-routinenotes.html" class="svg-icon">
+                                        <i>
+                                            <svg width="20" class="svg-icon" id="iq-main-4"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                                            </svg>
+                                        </i>
+                                        <span>Routine Notes</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="../backend/page-planning.html" class="svg-icon">
+                                        <i>
+                                            <svg width="20" class="svg-icon" id="iq-main-5"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                                            </svg>
+                                        </i>
+                                        <span>Planning</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </nav>
+                <div class="p-3"></div>
+            </div>
+        </div>
+        <div class="content-page" id="main-page">
+            <div class="container-fluid note-details">
+                <div class="desktop-header">
+                    <div class="card card-block topnav-left">
+                        <div class="card-body write-card">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="iq-note-callapse-menu">
+                                    <a class="iq-note-callapse-btn show-note-button" data-toggle="collapse"
+                                        href="#collapseMenu" role="button" data-extra-toggle="toggle"
+                                        data-extra-class-show=".hide-note-button"
+                                        data-extra-class-hide=".show-note-button" aria-expanded="false">
+                                        <i class="las la-pencil-alt pr-2"></i>Write Your Note
+                                    </a>
+                                    <span class="hide-note-button d-none" id="folder"><i
+                                            class="las la-folder pr-2"></i>Root</span>
+                                </div>
+                                <div class="note-right media align-items-top hide-note-button d-none">
+                                    <div class="mr-2"><a href="#" class="btn view-btn body-bg" data-toggle="modal"
+                                            data-target="#share-note">Share</a></div>
+                                    <div class="view-btn btn-dropdown body-bg rounded">
+                                        <div class="dropdown">
+                                            <span class="dropdown-toggle" id="dropdownMenuButton1"
+                                                data-toggle="dropdown">
+                                                <i class="ri-more-2-fill"></i>
+                                            </span>
+                                            <div class="dropdown-menu dropdown-menu-right"
+                                                aria-labelledby="dropdownMenuButton1">
+                                                <a class="dropdown-item" href="#"><i class="lar la-heart mr-3"></i>Add
+                                                    To Favourite</a>
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="las la-thumbtack mr-3"></i>Mark As Pin</a>
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="las la-trash-alt mr-3"></i>Move to Trash</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="collapse" id="collapseMenu">
+                            <div class="card card-block card-stretch">
+                                <div class="card-body write-card">
+                                    <div class="card-body">
+                                        <form action="{% url 'submit' %}" method="post" id="body-form">
+                                            <!-- <input type="hidden" name="author" id="id_author" value="{{ username }}">
+                                            <input type="hidden" name="parent_folder" id="parent-folder"> -->
+                                            <div class="form-group">
+                                                <label for="exampleInputText1">Title</label>
+                                                <input type="text" class="form-control" name="title" required=""
+                                                    id="id_title" placeholder="Enter Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputText1">Description</label>
+                                                <input type="text" class="form-control" name="slug_heading"
+                                                    id="slug_heading" placeholder="Enter Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <label for="exampleInputText1">Tags</label>
+                                                        <input type="text" class="form-control" name="tags" required=""
+                                                            id="id_tags" placeholder="Enter Name">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label>Priority</label>
+                                                        <select class="form-control">
+                                                            <option value="1">Highest</option>
+                                                            <option value="2">High</option>
+                                                            <option value="3">Medium</option>
+                                                            <option value="3">Low</option>
+                                                            <option value="3">Lowest</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="form-group">
+                                            <label for="exampleInputText1">Body</label>
+                                            {{ form.media }}
+                                            {{ form.body|safe }}
+                                            <script>
+                                                document.addEventListener('DOMContentLoaded', function () {
+                                                    // Initialize Froala Editor
+                                                    const froalaEditor = new FroalaEditor('#id_body', {
+                                                        events: {
+                                                            'change': function () {
+                                                                // Save content to local storage whenever it changes
+                                                                const content = this.html.get();
+                                                                localStorage.setItem('froalaContent', content);
+                                                            }
+                                                        }
+                                                    });
+                                        
+                                                    // Restore content from local storage on page load
+                                                    const savedContent = localStorage.getItem('froalaContent');
+                                                    if (savedContent) {
+                                                        froalaEditor.html.set(savedContent);
+                                                    }
+                                                });
+                                            </script>
+                                           </div> -->
+                                            <div class="form-group">
+                                                <label for="exampleInputText1">Body</label>
+                                                <link href="/static/froala_editor/css/froala_editor.min.css" media="all"
+                                                    rel="stylesheet">
+                                                <link href="/static/froala_editor/css/froala_style.min.css" media="all"
+                                                    rel="stylesheet">
+                                                <link href="/static/froala_editor/css/froala-django.css" media="all"
+                                                    rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/char_counter.min.css"
+                                                    media="all" rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/code_view.min.css"
+                                                    media="all" rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/colors.min.css"
+                                                    media="all" rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/draggable.min.css"
+                                                    media="all" rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/emoticons.min.css"
+                                                    media="all" rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/file.min.css" media="all"
+                                                    rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/fullscreen.min.css"
+                                                    media="all" rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/help.min.css" media="all"
+                                                    rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/image.min.css" media="all"
+                                                    rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/image_manager.min.css"
+                                                    media="all" rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/line_breaker.min.css"
+                                                    media="all" rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/quick_insert.min.css"
+                                                    media="all" rel="stylesheet">
+                                                <link
+                                                    href="/static/froala_editor/css/plugins/special_characters.min.css"
+                                                    media="all" rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/table.min.css" media="all"
+                                                    rel="stylesheet">
+                                                <link href="/static/froala_editor/css/plugins/video.min.css" media="all"
+                                                    rel="stylesheet">
+                                                <script src="/static/froala_editor/js/froala_editor.min.js"></script>
+                                                <script src="/static/froala_editor/js/froala-django.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/align.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/char_counter.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/code_beautifier.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/code_view.min.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/colors.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/draggable.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/emoticons.min.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/entities.min.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/file.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/font_family.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/font_size.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/fullscreen.min.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/help.min.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/image.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/image_manager.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/inline_style.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/line_breaker.min.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/link.min.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/lists.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/paragraph_format.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/paragraph_style.min.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/print.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/quick_insert.min.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/quote.min.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/save.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/special_characters.min.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/table.min.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/url.min.js"></script>
+                                                <script src="/static/froala_editor/js/plugins/video.min.js"></script>
+                                                <script
+                                                    src="/static/froala_editor/js/plugins/word_paste.min.js"></script>
+                                                <textarea name="body" cols="40" rows="10" required="" id="id_body"
+                                                    style="display: none;" a></textarea>
+                                                <script>
+                                                    new FroalaEditor('#id_body', {
+                                                        "inlineMode": false, "imageUploadURL": "/froala_editor/image_upload/", "imageUploadParams": { "csrfmiddlewaretoken": getCookie("csrftoken") }, "fileUploadURL": "/froala_editor/file_upload/", "fileUploadParams": { "csrfmiddlewaretoken": getCookie("csrftoken") }, events: {
+                                                            'initialized': function () {
+                                                                // Load content from local storage when the editor is initialized
+                                                                const froalaContent = localStorage.getItem('froalaContent');
+                                                                if (froalaContent) {
+                                                                    try {
+                                                                        this.html.set(froalaContent);
+                                                                    } catch (error) {
+                                                                        console.error('Error setting Froala Editor content:', error);
+                                                                    }
+                                                                }
+                                                            },
+                                                            'contentChanged': function () {
+                                                                // Save content to local storage whenever it changes
+                                                                const content = this.html.get();
+                                                                localStorage.setItem('froalaContent', content);
+                                                            }
+                                                        }
+                                                    })
+                                                </script>
+                                            </div>
+                                        </form>
+                                        <div class="col-lg-12 p-0 d-flex justify-content-end">
+                                            <button class="btn btn-outline-primary" data-extra-toggle="toggle" data-extra-class-show=".show-note-button" data-extra-class-hide=".hide-note-button">Close</button>
+                                            <button id="test-button" class="btn btn-primary ml-2" data-extra-toggle="toggle" data-extra-class-show=".show-note-button" data-extra-class-hide=".hide-note-button">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="card card-block card-stretch">
+                            <div class="card-body custom-notes-space">
+                                <h3 class="">Your Notes</h3>
+                                <div class="iq-tab-content">
+                                    <div class="d-flex flex-wrap align-items-top justify-content-between">
+                                        <ul class="d-flex nav nav-pills text-center note-tab mb-3" id="note-pills-tab"
+                                            role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link home active show" data-toggle="pill" data-init="note"
+                                                    href="#note1" role="tab" aria-selected="false">All</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link home" data-toggle="pill" data-init="pin-note"
+                                                    href="#note3" role="tab" aria-selected="false">Pin Notes</a>
+                                            </li>
+                                        </ul>
+                                        <div class="media align-items-top iq-grid">
+                                            <div class="view-btn rounded body-bg btn-dropdown filter-btn mr-3">
+                                                <div class="dropdown">
+                                                    <span class="dropdown-toggle cursor-pointer"
+                                                        id="dropdownMenuButton003" data-toggle="dropdown">
+                                                        <i class="las la-filter font-size-20"></i>
+                                                    </span>
+                                                    <div class="dropdown-menu dropdown-menu-right border-none"
+                                                        aria-labelledby="dropdownMenuButton003">
+                                                        <div class="dropdown-item mb-3">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <h6 class="mr-4"><i class="las la-book mr-3"></i>Located
+                                                                    In</h6>
+                                                                <div class="form-group mb-0">
+                                                                    <select name="type"
+                                                                        class="basic-select form-control dropdown-toggle"
+                                                                        data-style="py-0">
+                                                                        <option value="1">Project Plans</option>
+                                                                        <option value="2">Routine Notes</option>
+                                                                        <option value="3">Planning</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dropdown-item mb-3">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <h6 class="mr-4"><i
+                                                                        class="las la-paste mr-3"></i>Contains</h6>
+                                                                <div class="form-group mb-0">
+                                                                    <select name="type"
+                                                                        class="basic-select form-control dropdown-toggle"
+                                                                        data-style="py-0">
+                                                                        <option value="1">Address</option>
+                                                                        <option value="2">Archive Files</option>
+                                                                        <option value="3">Code Blocks</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dropdown-item mb-2">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between">
+                                                                <h6 class="mr-4"><i
+                                                                        class="las la-calendar mr-3"></i>Created</h6>
+                                                                <div class="form-group mb-0">
+                                                                    <select id="date-select" name="type"
+                                                                        class="basic-select form-control dropdown-toggle"
+                                                                        data-style="py-0">
+                                                                        <option value="today">Today</option>
+                                                                        <option value="yest">Yesterday</option>
+                                                                        <option value="last-week">Last Week</option>
+                                                                        <option value="last-month">Last Month</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-grid-toggle cursor-pointer">
+                                                <span class="icon active i-grid rounded"><i
+                                                        class="ri-layout-grid-line font-size-20"></i></span>
+                                                <span class="icon active i-list rounded"><i
+                                                        class="ri-list-check font-size-20"></i></span>
+                                                <span class="label label-list">List</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="note-content tab-content">
+                                        <div id="note1" class="tab-pane fade active show">
+                                            <div class="icon active animate__animated animate__fadeIn i-grid">
+                                                <div class="row" id="notes-cards">
+                                                </div>
+                                            </div>
+                                            <div class="icon active animate__animated animate__fadeIn i-list">
+                                                <div class="row" id="notes-column">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="note3" class="tab-pane fade">
+                                            <div class="icon active animate__animated animate__fadeIn i-grid">
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6">
+                                                        <div
+                                                            class="card card-block card-stretch card-height card-bottom-border-purple note-detail">
+                                                            <div
+                                                                class="card-header d-flex justify-content-between pb-1">
+                                                                <div
+                                                                    class="icon iq-icon-box-2 icon-border-purple rounded">
+                                                                    <svg width="23" height="23" class="svg-icon"
+                                                                        id="iq-main-16"
+                                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path stroke-linecap="round"
+                                                                            stroke-linejoin="round" stroke-width="2"
+                                                                            d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
+                                                                    </svg>
+                                                                </div>
+                                                                <div
+                                                                    class="card-header-toolbar d-flex align-items-center">
+                                                                    <a href="#" data-toggle="tooltip"
+                                                                        data-placement="top" title=""
+                                                                        data-original-title="pin content"><i
+                                                                            class="las la-thumbtack mr-2"></i></a>
+                                                                    <div
+                                                                        class="card-header-toolbar d-flex align-items-center">
+                                                                        <div class="dropdown">
+                                                                            <span class="dropdown-toggle dropdown-bg"
+                                                                                id="note-dropdownMenuButton19"
+                                                                                data-toggle="dropdown"
+                                                                                aria-expanded="false" role="button">
+                                                                                <i class="ri-more-fill"></i>
+                                                                            </span>
+                                                                            <div class="dropdown-menu dropdown-menu-right"
+                                                                                aria-labelledby="note-dropdownMenuButton19"
+                                                                                style="">
+                                                                                <a href="#"
+                                                                                    class="dropdown-item new-note2"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#new-note2"><i
+                                                                                        class="las la-eye mr-3"></i>View</a>
+                                                                                <a href="#"
+                                                                                    class="dropdown-item edit-note1"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#edit-note1"><i
+                                                                                        class="las la-pen mr-3"></i>Edit</a>
+                                                                                <a class="dropdown-item"
+                                                                                    data-extra-toggle="delete"
+                                                                                    data-closest-elem=".card"
+                                                                                    href="#"><i
+                                                                                        class="las la-trash-alt mr-3"></i>Delete</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body rounded">
+                                                                <h4 class="card-title">Birthday Celebration</h4>
+                                                                <p class="mb-3 card-description short">You can easily
+                                                                    share via message, WhatsApp, emails etc. You can
+                                                                    also save your notes and edit it later or can easily
+                                                                    delete the note.</p>
+                                                                <ul class="pl-3 mb-0">
+                                                                    <li class="note-list">Cakes and Balloons.</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <div
+                                                                    class="d-flex align-items-center justify-content-between note-text note-text-purple">
+                                                                    <a href="#" class=""><i
+                                                                            class="las la-user mr-2 font-size-20"></i>Only
+                                                                        You</a>
+                                                                    <a href="#" class=""><i
+                                                                            class="las la-calendar mr-2 font-size-20"></i>10
+                                                                        Jan 2021</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="icon active animate__animated animate__fadeIn i-list">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="table-responsive">
+                                                            <table class="table  tbl-server-info">
+                                                                <thead>
+                                                                    <tr class="ligth">
+                                                                        <th class="w-50" scope="col">Title</th>
+                                                                        <th scope="col">Permission</th>
+                                                                        <th scope="col">Created At</th>
+                                                                        <th scope="col">Action</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <h4 class="mb-2">Birthday Celebration <i
+                                                                                    class="las la-thumbtack ml-2"></i>
+                                                                            </h4>
+                                                                            <span>You can easily share via message,
+                                                                                WhatsApp, emails etc.</span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <i
+                                                                                class="las la-lock mr-2 font-size-20"></i>
+                                                                            Only You
+                                                                        </td>
+                                                                        <td>Dec 20</td>
+                                                                        <td>
+                                                                            <div>
+                                                                                <a href="#"
+                                                                                    class="badge badge-success mr-3"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#edit-note1"><i
+                                                                                        class="las la-pen mr-0"></i></a>
+                                                                                <a href="#" class="badge badge-danger"
+                                                                                    data-extra-toggle="delete"
+                                                                                    data-closest-elem="tr"><i
+                                                                                        class="las la-trash-alt mr-0"></i></a>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Page end  -->
+            </div>
+            <!-- Share Modal -->
+
+            <!-- Modal -->
+            <!-- Modal View -->
+             <div id="modal">
+             </div>
+        </div>
+    </div>
+    <!-- Wrapper End-->
+    <!-- Backend Bundle JavaScript -->
+    <script src="{% static 'assets/js/backend-bundle.min.js' %}"></script>
+
+    <!-- Flextree Javascript-->
+    <script src="{% static 'assets/js/flex-tree.min.js' %}"></script>
+    <script src="{% static 'assets/js/tree.js' %}"></script>
+
+    <!-- Table Treeview JavaScript -->
+    <script src="{% static 'assets/js/table-treeview.js' %}"></script>
+
+    <!-- SweetAlert JavaScript -->
+    <script src="{% static 'assets/js/sweetalert.js' %}"></script>
+
+    <!-- Chart Custom JavaScript -->
+    <script src="{% static 'assets/js/chart-custom.js' %}"></script>
+
+    <!-- slider JavaScript -->
+    <script src="{% static 'assets/js/slider.js' %}"></script>
+
+    <!-- app JavaScript -->
+    <script src="{% static 'assets/js/app.js' %}"></script>
+    <script src="{% static 'assets/js/notesHeading.js' %}"></script>
+    <script src="{% static 'assets/js/submitForm.js' %}"></script>
+</body>
+
+</html>
+{% endblock body %}
