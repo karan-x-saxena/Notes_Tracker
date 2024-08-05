@@ -26,6 +26,10 @@
             width: 80%;
         }
 
+        .error {
+            color: red;
+        }
+
     </style>
 </head>
 
@@ -602,33 +606,34 @@
                                 <div class="card-body write-card">
                                     <div class="card-body">
                                         <form action="{% url 'submit' %}" method="post" id="body-form">
+                                            <p id="submitResponse"></p>
                                             <!-- <input type="hidden" name="author" id="id_author" value="{{ username }}">
                                             <input type="hidden" name="parent_folder" id="parent-folder"> -->
                                             <div class="form-group">
-                                                <label for="exampleInputText1">Title</label>
+                                                <label id="label_title" for="exampleInputText1">Title</label>
                                                 <input type="text" class="form-control" name="title" required=""
                                                     id="id_title" placeholder="Enter Name">
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputText1">Description</label>
+                                                <label id="label_slug_heading" for="exampleInputText1">Description</label>
                                                 <input type="text" class="form-control" name="slug_heading"
                                                     id="slug_heading" placeholder="Enter Name">
                                             </div>
                                             <div class="form-group">
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <label for="exampleInputText1">Tags</label>
+                                                        <label id="label_tags" for="exampleInputText1">Tags</label>
                                                         <input type="text" class="form-control" name="tags" required=""
                                                             id="id_tags" placeholder="Enter Name">
                                                     </div>
                                                     <div class="col">
-                                                        <label>Priority</label>
-                                                        <select class="form-control">
-                                                            <option value="1">Highest</option>
-                                                            <option value="2">High</option>
-                                                            <option value="3">Medium</option>
-                                                            <option value="3">Low</option>
-                                                            <option value="3">Lowest</option>
+                                                        <label id="label_priority">Priority</label>
+                                                        <select class="form-control" name="priority">
+                                                            <option value="highest">Highest</option>
+                                                            <option value="high">High</option>
+                                                            <option value="medium" selected="selected">Medium</option>
+                                                            <option value="low">Low</option>
+                                                            <option value="lowest">Lowest</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -745,7 +750,7 @@
                                                 <script src="/static/froala_editor/js/plugins/video.min.js"></script>
                                                 <script
                                                     src="/static/froala_editor/js/plugins/word_paste.min.js"></script>
-                                                <textarea name="body" cols="40" rows="10" required="" id="id_body"
+                                                <textarea name="body" cols="40" rows="10" required="" data-ignore-cache="true" id="id_body"
                                                     style="display: none;" a></textarea>
                                                 <script>
                                                     new FroalaEditor('#id_body', {
@@ -773,7 +778,8 @@
                                         </form>
                                         <div class="col-lg-12 p-0 d-flex justify-content-end">
                                             <button class="btn btn-outline-primary" data-extra-toggle="toggle" data-extra-class-show=".show-note-button" data-extra-class-hide=".hide-note-button">Close</button>
-                                            <button id="test-button" class="btn btn-primary ml-2" data-extra-toggle="toggle" data-extra-class-show=".show-note-button" data-extra-class-hide=".hide-note-button">Save</button>
+                                            <button class="btn btn-primary ml-2" data-extra-toggle="toggle" data-extra-class-show=".show-note-button" data-extra-class-hide=".hide-note-button">Cancel</button>
+                                            <button id="test-button" class="btn btn-primary ml-2" data-extra-class-show=".show-note-button" data-extra-class-hide=".hide-note-button">Save</button>
                                         </div>
                                     </div>
                                 </div>

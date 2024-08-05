@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const folder = document.getElementById('folder');
     const previousTitlesButton = document.getElementById('previous-title');
     const modal = document.getElementById('modal');
-    const priorityMap = { Highest: "danger", High: "warning", Medium: "purple", Low: "info", Lowest: "success", medium: "purple" }
+    const priorityMap = { highest: "danger", high: "warning", medium: "purple", low: "info", lowest: "success", medium: "purple" }
     let folderStack = []
 
     // Function to fetch and display all titles
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
             <div class="card-body rounded">
                 <h4 class="card-title">${titles.title}</h4>
-                <p class="mb-3 card-description short">${titles.slug_field}</p>                                                            
+                <p class="mb-3 card-description short">${titles.slug_heading}</p>                                                            
             </div>
             <div class="card-footer">
                 <div class="d-flex align-items-center justify-content-between note-text note-text-info">
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <tr>
                         <td>
                             <h4 class="mb-2">${titles.title}</h4>
-                            <span>${titles.slug_field}</span>
+                            <span>${titles.slug_heading}</span>
                         </td>
                         <td>
                         <img class="" src=${priorityURL} width="70" height="35">

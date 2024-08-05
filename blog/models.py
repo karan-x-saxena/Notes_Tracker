@@ -3,10 +3,10 @@ from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from froala_editor.fields import FroalaField
 
-PRIORITY_CHOICES = [('Highest', 'highest'), ('High', 'high'), ('Medium', 'medium'), 
-            ('Low', 'low'), ('Lowest', 'lowest')]
+PRIORITY_CHOICES = [('highest', 'Highest'), ('high', 'High'), ('medium', 'Medium'), 
+            ('low', 'Low'), ('lowest', 'Lowest')]
 
-CATEGORY_CHOICES = [('User', 'user'), ('Filter', 'filter')]
+CATEGORY_CHOICES = [('user', 'User'), ('filter', 'Filter')]
 
 
 class NoteTrackerUser(AbstractUser):
@@ -15,18 +15,17 @@ class NoteTrackerUser(AbstractUser):
         super(NoteTrackerUser, self).save(*args, **kwargs)
 
         if not pk:
-            access_tag = Tag(name='access', category='user', user=NoteTrackerUser.objects.get(pk=self.pk))
+            access_tag = Tag(name=self.username, category='user')
             access_tag.save()
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
-    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
-    user = models.ForeignKey(NoteTrackerUser, on_delete=models.CASCADE, related_name='tags')
+    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, default='filter')
 
 
 class Note(models.Model):
-    title = models.CharField(max_length=400, blank=False, null=False)
+    title = models.CharField(max_length=400, blank=False, unique=True, null=False)
     slug_heading = models.CharField(max_length=500, blank=True)
     priority = models.CharField(max_length=100, choices=PRIORITY_CHOICES, default='medium')
     body = FroalaField(blank=True, null=True)
