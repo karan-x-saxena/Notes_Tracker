@@ -141,11 +141,13 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, STATIC_URL)
 
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / MEDIA_URL
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-FROALA_UPLOAD_PATH = os.path.join(BASE_DIR, 'uploads/froala_editor/images')
+FROALA_UPLOAD_PATH = os.path.join(MEDIA_ROOT, 'froala_editor/images')
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True

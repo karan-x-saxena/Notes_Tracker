@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{% static 'assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendor/remixicon/fonts/remixicon.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendor/@icon/dripicons/dripicons.css' %}">
-    <script src="{% static 'assets/js/formCache.js' %}"></script>
+    <script src="{% static 'assets/js/createFlow.js' %}"></script>
     <script>
         // Pass the static URL to JavaScript
         const staticURL = "{% static 'assets/images/' %}";
@@ -30,6 +30,84 @@
             color: red;
         }
 
+        .multi-select-container {
+            position: relative;
+            width: 300px; /* Fixed width for the container */
+            height: 50px; /* Fixed height for the container */
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 3px;
+            display: flex;
+            flex-wrap: nowrap; /* Prevent wrapping of items */
+            align-items: center;
+            overflow-x: auto; /* Add horizontal scrollbar */
+            overflow-y: hidden; /* Hide vertical scrollbar */
+            background: white; /* Ensure background is white for visibility */
+        }
+
+        .input-tag {
+            display: inline-flex;
+            align-items: center;
+            background: #f1f1f1;
+            padding: 5px;
+            margin: 2px;
+            border-radius: 3px;
+        }
+
+        .input-tag span {
+            margin-right: 5px;
+        }
+
+        .input-tag button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .input-tag button:focus {
+            outline: none;
+        }
+
+        .select-input {
+            border: none;
+            outline: none;
+            flex: 1;
+            min-width: 50px;
+            height: 100%; /* Match the height of the container */
+            box-sizing: border-box; /* Ensure padding and border are included in height */
+        }
+
+        .dropdown-options {
+            position: absolute;
+            top: 100%; /* Position below the input */
+            left: 0;
+            right: 0;
+            max-height: 150px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            z-index: 10;
+            display: none; /* Initially hidden */
+            font-family: "Jost", sans-serif;
+        }
+
+        .dropdown-options.active {
+            display: block; /* Show dropdown when active */
+        }
+
+        .dropdown-option {
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .dropdown-option:hover {
+            background: #000000;
+            color: white;
+            font-family: "Jost", sans-serif;
+        }
+
+
     </style>
 </head>
 
@@ -39,7 +117,7 @@
         <div id="loading-center">
         </div>
     </div>
-    <div class="right-sidebar-mini right-sidebar">
+    <!-- <div class="right-sidebar-mini right-sidebar">
         <div class="right-sidebar-panel p-0">
             <div class="right-sidebar-toggle bg-primary mt-3" data-extra-toggle="right-sidebar-dissmiss">
                 <i class="ri-arrow-left-line side-left-icon"></i>
@@ -355,9 +433,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Modal -->
-    <div class="modal fade" id="create-note" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- <div class="modal fade" id="create-note" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -376,10 +454,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Modal -->
-    <div class="modal fade" id="tag-rename" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <!-- <div class="modal fade" id="tag-rename" tabindex="-1" role="dialog" aria-hidden="true"> -->
+    <!-- <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="popup text-left">
@@ -396,8 +474,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div> <!-- loader END -->
+        </div> -->
+    <!-- </div> loader END -->
     <!-- Wrapper Start -->
     <div class="wrapper">
         <div class="iq-top-navbar">
@@ -405,7 +483,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light p-0">
                     <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                         <i class="ri-menu-line wrapper-menu"></i>
-                        <a href="../backend/index.html" class="header-logo">
+                        <a href="/test_blog" class="header-logo">
                             <img src="{% static 'assets/images/logo.png' %}" class="img-fluid rounded-normal light-logo"
                                 alt="logo">
 
@@ -428,9 +506,10 @@
                                         aria-labelledby="h1-dropdownSearch">
                                         <form action="#" class="searchbox p-2">
                                             <div class="form-group mb-0 position-relative">
-                                                <input type="text" class="text search-input font-size-12"
+                                                <input id="search_1" type="text" class="text search-input font-size-12"
                                                     placeholder="type here to search...">
-                                                <a href="#" class="search-link"><i class="las la-search"></i></a>
+                                                <a href="#" class="search-link search-title" input-id="search_1"><i
+                                                        class="las la-search"></i></a>
                                             </div>
                                         </form>
                                     </div>
@@ -440,12 +519,12 @@
                                         id="h-dropdownMenuButton001" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                         <div class="caption">
-                                            <h6 class="mb-0 line-height" id="username">{{ username }}</h6>
+                                            <h6 class="mb-0 line-height username" id="username"></h6>
                                         </div>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right w-100 border-0 py-2"
                                         aria-labelledby="h-dropdownMenuButton001">
-                                        <a class="dropdown-item" href="../backend/index.html">
+                                        <a class="dropdown-item logout">
                                             <i class="las la-sign-out-alt font-size-20 mr-1"></i>
                                             <span>Logout</span>
                                         </a>
@@ -459,7 +538,7 @@
         </div>
         <div class="iq-sidebar  sidebar-default ">
             <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-                <a href="../backend/index.html" class="header-logo">
+                <a href="/test_blog" class="header-logo">
                     <img src="{% static 'assets/images/logo.png' %}" class="img-fluid rounded-normal light-logo"
                         alt="logo">
                     <h4 class="logo-title ml-3">NotePlus</h4>
@@ -472,12 +551,12 @@
                 <a href="#" class="iq-user-toggle d-flex align-items-center justify-content-between"
                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="caption">
-                        <h6 class="mb-0 line-height" id="username">{{ username }}</h6>
+                        <h6 class="mb-0 line-height username" id="username"></h6>
                     </div>
                     <i class="las la-angle-down"></i>
                 </a>
                 <div class="dropdown-menu w-100 border-0 my-2" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="../backend/auth-sign-in.html">
+                    <a class="dropdown-item logout">
                         <i class="las la-sign-out-alt font-size-20 mr-1"></i>
                         <span>Logout</span>
                     </a>
@@ -486,8 +565,9 @@
             <div class="data-scrollbar" data-scroll="1">
                 <div class="iq-search-bar device-search mb-3">
                     <form action="#" class="searchbox">
-                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-                        <input type="text" class="text search-input" placeholder="Search">
+                        <a class="search-link search-title" input-id="search_2" href="#"><i
+                                class="ri-search-line"></i></a>
+                        <input id="search_2" type="text" class="text search-input" placeholder="Search">
                     </form>
                 </div>
                 <div class="iq-search-bar device-search mb-3">
@@ -565,35 +645,14 @@
                         <div class="card-body write-card">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="iq-note-callapse-menu">
-                                    <a class="iq-note-callapse-btn show-note-button" data-toggle="collapse"
-                                        href="#collapseMenu" role="button" data-extra-toggle="toggle"
-                                        data-extra-class-show=".hide-note-button"
+                                    <a id="target-link" class="iq-note-callapse-btn show-note-button"
+                                        data-toggle="collapse" href="#collapseMenu" role="button"
+                                        data-extra-toggle="toggle" data-extra-class-show=".hide-note-button"
                                         data-extra-class-hide=".show-note-button" aria-expanded="false">
                                         <i class="las la-pencil-alt pr-2"></i>Write Your Note
                                     </a>
                                     <span class="hide-note-button d-none" id="folder"><i
                                             class="las la-folder pr-2"></i>Root</span>
-                                </div>
-                                <div class="note-right media align-items-top hide-note-button d-none">
-                                    <div class="mr-2"><a href="#" class="btn view-btn body-bg" data-toggle="modal"
-                                            data-target="#share-note">Share</a></div>
-                                    <div class="view-btn btn-dropdown body-bg rounded">
-                                        <div class="dropdown">
-                                            <span class="dropdown-toggle" id="dropdownMenuButton1"
-                                                data-toggle="dropdown">
-                                                <i class="ri-more-2-fill"></i>
-                                            </span>
-                                            <div class="dropdown-menu dropdown-menu-right"
-                                                aria-labelledby="dropdownMenuButton1">
-                                                <a class="dropdown-item" href="#"><i class="lar la-heart mr-3"></i>Add
-                                                    To Favourite</a>
-                                                <a class="dropdown-item" href="#"><i
-                                                        class="las la-thumbtack mr-3"></i>Mark As Pin</a>
-                                                <a class="dropdown-item" href="#"><i
-                                                        class="las la-trash-alt mr-3"></i>Move to Trash</a>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -607,15 +666,14 @@
                                     <div class="card-body">
                                         <form action="{% url 'submit' %}" method="post" id="body-form">
                                             <p id="submitResponse"></p>
-                                            <!-- <input type="hidden" name="author" id="id_author" value="{{ username }}">
-                                            <input type="hidden" name="parent_folder" id="parent-folder"> -->
                                             <div class="form-group">
                                                 <label id="label_title" for="exampleInputText1">Title</label>
                                                 <input type="text" class="form-control" name="title" required=""
                                                     id="id_title" placeholder="Enter Name">
                                             </div>
                                             <div class="form-group">
-                                                <label id="label_slug_heading" for="exampleInputText1">Description</label>
+                                                <label id="label_slug_heading"
+                                                    for="exampleInputText1">Description</label>
                                                 <input type="text" class="form-control" name="slug_heading"
                                                     id="slug_heading" placeholder="Enter Name">
                                             </div>
@@ -638,31 +696,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <div class="form-group">
-                                            <label for="exampleInputText1">Body</label>
-                                            {{ form.media }}
-                                            {{ form.body|safe }}
-                                            <script>
-                                                document.addEventListener('DOMContentLoaded', function () {
-                                                    // Initialize Froala Editor
-                                                    const froalaEditor = new FroalaEditor('#id_body', {
-                                                        events: {
-                                                            'change': function () {
-                                                                // Save content to local storage whenever it changes
-                                                                const content = this.html.get();
-                                                                localStorage.setItem('froalaContent', content);
-                                                            }
-                                                        }
-                                                    });
-                                        
-                                                    // Restore content from local storage on page load
-                                                    const savedContent = localStorage.getItem('froalaContent');
-                                                    if (savedContent) {
-                                                        froalaEditor.html.set(savedContent);
-                                                    }
-                                                });
-                                            </script>
-                                           </div> -->
                                             <div class="form-group">
                                                 <label for="exampleInputText1">Body</label>
                                                 <link href="/static/froala_editor/css/froala_editor.min.css" media="all"
@@ -750,10 +783,11 @@
                                                 <script src="/static/froala_editor/js/plugins/video.min.js"></script>
                                                 <script
                                                     src="/static/froala_editor/js/plugins/word_paste.min.js"></script>
-                                                <textarea name="body" cols="40" rows="10" required="" data-ignore-cache="true" id="id_body"
-                                                    style="display: none;" a></textarea>
+                                                <textarea name="body" cols="40" rows="10" required=""
+                                                    data-ignore-cache="true" id="id_body" style="display: none;"
+                                                    a></textarea>
                                                 <script>
-                                                    new FroalaEditor('#id_body', {
+                                                    const editior = new FroalaEditor('#id_body', {
                                                         "inlineMode": false, "imageUploadURL": "/froala_editor/image_upload/", "imageUploadParams": { "csrfmiddlewaretoken": getCookie("csrftoken") }, "fileUploadURL": "/froala_editor/file_upload/", "fileUploadParams": { "csrfmiddlewaretoken": getCookie("csrftoken") }, events: {
                                                             'initialized': function () {
                                                                 // Load content from local storage when the editor is initialized
@@ -777,9 +811,18 @@
                                             </div>
                                         </form>
                                         <div class="col-lg-12 p-0 d-flex justify-content-end">
-                                            <button class="btn btn-outline-primary" data-extra-toggle="toggle" data-extra-class-show=".show-note-button" data-extra-class-hide=".hide-note-button">Close</button>
-                                            <button class="btn btn-primary ml-2" data-extra-toggle="toggle" data-extra-class-show=".show-note-button" data-extra-class-hide=".hide-note-button">Cancel</button>
-                                            <button id="test-button" class="btn btn-primary ml-2" data-extra-class-show=".show-note-button" data-extra-class-hide=".hide-note-button">Save</button>
+                                            <button class="btn btn-outline-primary" data-extra-toggle="toggle"
+                                                data-extra-class-show=".show-note-button"
+                                                data-extra-class-hide=".hide-note-button">Close</button>
+                                            <button id="cancel-button" class="btn btn-primary ml-2"
+                                                data-extra-toggle="toggle" data-extra-class-show=".show-note-button"
+                                                data-extra-class-hide=".hide-note-button">Cancel</button>
+                                            <button id="test-button" class="btn btn-primary ml-2"
+                                                data-extra-class-show=".show-note-button"
+                                                data-extra-class-hide=".hide-note-button">Save</button>
+                                            <button id="toggle-button" class="btn btn-primary ml-2"
+                                                data-extra-toggle="toggle" data-extra-class-show=".show-note-button"
+                                                data-extra-class-hide=".hide-note-button" hidden>Toggle</button>
                                         </div>
                                     </div>
                                 </div>
@@ -816,17 +859,128 @@
                                                         <div class="dropdown-item mb-3">
                                                             <div
                                                                 class="d-flex align-items-center justify-content-between">
-                                                                <h6 class="mr-4"><i class="las la-book mr-3"></i>Located
-                                                                    In</h6>
-                                                                <div class="form-group mb-0">
-                                                                    <select name="type"
-                                                                        class="basic-select form-control dropdown-toggle"
-                                                                        data-style="py-0">
-                                                                        <option value="1">Project Plans</option>
-                                                                        <option value="2">Routine Notes</option>
-                                                                        <option value="3">Planning</option>
-                                                                    </select>
-                                                                </div>
+                                                                <h6 class="mr-4"><i class="las la-book mr-3"></i>Tags</h6>
+                                                                <div class="form-group mb-0"><label>
+                                                                    Multi-select
+                                                                    <input mbsc-input id="my-input" data-dropdown="true" data-tags="true" />
+                                                                </label>
+                                                                <select id="multiple-select" multiple>
+                                                                    <option value="1">Books</option>
+                                                                    <option value="2">Movies, Music & Games</option>
+                                                                    <option value="3">Electronics & Computers</option>
+                                                                    <option value="4">Home, Garden & Tools</option>
+                                                                    <option value="5">Health & Beauty</option>
+                                                                    <option value="6">Toys, Kids & Baby</option>
+                                                                    <option value="7">Clothing & Jewelry</option>
+                                                                    <option value="8">Sports & Outdoors</option>
+                                                                </select>
+                                                                <script>
+                                                                    mobiscroll.select('#multiple-select', {
+    inputElement: document.getElementById('my-input'),
+    touchUi: false
+});
+
+                                                                </script>
+                                                            </div>
+                                                                <!-- <div class="form-group mb-0">
+                                                                    <div class="multi-select-container" id="multiSelectContainer">
+                                                                        <div id="tags-container"></div>
+                                                                        <input type="text" id="selectInput" class="select-input" placeholder="Type or select..." oninput="filterOptions()" onfocus="showDropdown()">
+                                                                        
+                                                                    </div> -->
+                                                                    <!-- <div class="multi-select-container1"><div class="dropdown-options" id="dropdownOptions"></div></div> -->
+                                                                    <!-- Hidden input to store the array as a JSON string -->
+                                                                    <!-- <input type="hidden" name="inputs" id="hiddenInput"> -->
+                                                            
+                                                                    <!-- CSRF Token (if required) -->
+                                                                    <!-- <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}"> -->
+                                                                    <!-- <script>
+                                                                        const options = ['Apple', 'Banana', 'Cherry', 'Date', 'Grape', 'Lemon', 'Mango', 'Orange', 'Peach', 'Pear'];
+        let selectedOptions = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            populateOptions();
+        });
+
+        function populateOptions() {
+            const dropdown = document.getElementById('dropdownOptions');
+            dropdown.innerHTML = '';
+            options.forEach(option => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'dropdown-option';
+                optionDiv.textContent = option;
+                optionDiv.addEventListener('click', () => selectOption(option));
+                dropdown.appendChild(optionDiv);
+            });
+        }
+
+        function showDropdown() {
+            const dropdown = document.getElementById('dropdownOptions');
+            dropdown.classList.add('active');
+        }
+
+        function filterOptions() {
+            const input = document.getElementById('selectInput').value.toLowerCase();
+            const dropdown = document.getElementById('dropdownOptions');
+            dropdown.innerHTML = '';
+            const filteredOptions = options.filter(option => option.toLowerCase().includes(input));
+            filteredOptions.forEach(option => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'dropdown-option';
+                optionDiv.textContent = option;
+                optionDiv.addEventListener('click', () => selectOption(option));
+                dropdown.appendChild(optionDiv);
+            });
+            showDropdown(); // Ensure dropdown remains visible during filtering
+        }
+
+        function selectOption(option) {
+            if (!selectedOptions.includes(option)) {
+                selectedOptions.push(option);
+                updateSelectedOptions();
+                updateHiddenInput();
+            }
+            document.getElementById('selectInput').value = ''; // Clear the input after selection
+            document.getElementById('selectInput').focus(); // Refocus input for more selections
+        }
+
+        function updateSelectedOptions() {
+            const tagsContainer = document.getElementById('tags-container');
+            tagsContainer.innerHTML = '';
+            selectedOptions.forEach((option, index) => {
+                const tag = document.createElement('div');
+                tag.className = 'input-tag';
+                tag.innerHTML = `<span>${option}</span><button type="button" onclick="removeOption(${index})">&times;</button>`;
+                tagsContainer.appendChild(tag);
+            });
+        }
+
+        function removeOption(index) {
+            selectedOptions.splice(index, 1);
+            updateSelectedOptions();
+            updateHiddenInput();
+        }
+
+        function updateHiddenInput() {
+            const hiddenInput = document.getElementById('hiddenInput');
+            hiddenInput.value = JSON.stringify(selectedOptions);
+        }
+
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdownOptions');
+            const container = document.getElementById('multiSelectContainer');
+            if (!container.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Prevent click on the dropdown from closing it
+        document.getElementById('dropdownOptions').addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+                                                                    </script> -->
+                                                                <!-- </div> -->
                                                             </div>
                                                         </div>
                                                         <div class="dropdown-item mb-3">
@@ -887,7 +1041,7 @@
                                         </div>
                                         <div id="note3" class="tab-pane fade">
                                             <div class="icon active animate__animated animate__fadeIn i-grid">
-                                                <div class="row">
+                                                <div class="row" id="pin-notes-cards">
                                                     <div class="col-lg-4 col-md-6">
                                                         <div
                                                             class="card card-block card-stretch card-height card-bottom-border-purple note-detail">
@@ -968,7 +1122,7 @@
                                                 </div>
                                             </div>
                                             <div class="icon active animate__animated animate__fadeIn i-list">
-                                                <div class="row">
+                                                <div class="row" id="pin-notes-columns">
                                                     <div class="col-lg-12">
                                                         <div class="table-responsive">
                                                             <table class="table  tbl-server-info">
@@ -983,8 +1137,11 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td>
-                                                                            <h4 class="mb-2">Birthday Celebration <i
-                                                                                    class="las la-thumbtack ml-2"></i>
+                                                                            <h4 class="mb-2">Birthday Celebration<a
+                                                                                    href="#" data-toggle="tooltip"
+                                                                                    data-placement="top" title=""
+                                                                                    data-original-title="pin content"><i
+                                                                                        class="las la-thumbtack mr-2"></i></a>
                                                                             </h4>
                                                                             <span>You can easily share via message,
                                                                                 WhatsApp, emails etc.</span>
@@ -1028,8 +1185,8 @@
 
             <!-- Modal -->
             <!-- Modal View -->
-             <div id="modal">
-             </div>
+            <div id="modal">
+            </div>
         </div>
     </div>
     <!-- Wrapper End-->
@@ -1055,7 +1212,8 @@
     <!-- app JavaScript -->
     <script src="{% static 'assets/js/app.js' %}"></script>
     <script src="{% static 'assets/js/notesHeading.js' %}"></script>
-    <script src="{% static 'assets/js/submitForm.js' %}"></script>
+    <script src="{% static 'assets/js/editFlow.js' %}"></script>
+    <script src="{% static 'assets/js/logoutFlow.js' %}"></script>
 </body>
 
 </html>

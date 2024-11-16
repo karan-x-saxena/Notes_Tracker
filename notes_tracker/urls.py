@@ -22,7 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^grappelli/', include('grappelli.urls')),
-    path('froala_editor/', include('froala_editor.urls')),
     path('blog/', include('blog.urls')),
-    path('', include('render.urls'))
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('', include('render.urls')),
+    path('froala_editor/', include('froala_editor.urls'))
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

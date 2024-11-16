@@ -1,8 +1,23 @@
+function loadFormData() {
+    console.log('Loading form data...');
+    const form = document.getElementById('body-form');
+    for (let element of form.elements) {
+        if (element.name && !element.hasAttribute('data-ignore-cache') && localStorage.getItem(element.name)) {
+            element.value = localStorage.getItem(element.name);
+        }
+    }
+    // Load Froala Editor content
+    // const froalaContent = localStorage.getItem('froalaContent');
+    // if (froalaContent) {
+    //     froalaEditor.html.set(froalaContent);
+    // }
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     // Ensure the form exists
     const form = document.getElementById('body-form');
     const folder = document.getElementById('folder');
+    const cancelButton = document.getElementById('cancel-button');
     // if (!form) {
     //     console.error('Form with ID "myForm" not found.');
     //     return;
@@ -21,19 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Function to load form data from localStorage
-    function loadFormData() {
-        console.log('Loading form data...');
-        for (let element of form.elements) {
-            if (element.name && !element.hasAttribute('data-ignore-cache') && localStorage.getItem(element.name)) {
-                element.value = localStorage.getItem(element.name);
-            }
-        }
-        // Load Froala Editor content
-        // const froalaContent = localStorage.getItem('froalaContent');
-        // if (froalaContent) {
-        //     froalaEditor.html.set(froalaContent);
-        // }
-    }
+    
 
     // Load form data when the page is loaded
     loadFormData();
@@ -54,6 +57,15 @@ document.addEventListener('DOMContentLoaded', function () {
             "parent_note": folder.textContent,
             "author": getCookie('username')
         }
+        let method = 'POST';
+        let api = '/blog/api/notes_title/';
+        if (localStorage.getItem('update_title')) {
+            old_title = localStorage.getItem('update_title')
+            method = 'PUT';
+            api = `/blog/api/update_notes_title/${old_title}/`
+            console.log(api)
+        }
+
         for (let element of form.elements) {
             if (element.name in payload) {
                 console.log(element.value)
@@ -71,11 +83,12 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         console.log(payload)
-        fetch('/blog/api/notes_title/', {
-            method: 'POST',
+        fetch(api, {
+            method: method,
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
+                'X-CSRFToken': getCookie('csrftoken'),
+                'Authorization': 'Token' + ' ' + getCookie('Token')
             },
             body: JSON.stringify(payload)
         })
@@ -83,24 +96,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log('Response status:', response.status);
                 return response.json().then(data => {
                     console.log('Response JSON:', data);
-                    if (response.status === 201) {
+                    if (response.status == 201 || response.status == 200) {
                         return data;
                     }
                     throw data;
                 });
             })
             .then(data => {
-                saveButton.setAttribute("data-extra-toggle", "toggle")
                 localStorage.clear();
                 form.reset();
+                document.getElementById('toggle-button').click();
+                document.getElementById('previous-title').click();
             })
             .catch(error => {
                 console.error('Error:', error);
-                if ('detail' in error) {
-                    const value = error.detail
-                    document.getElementById('submitResponse').innerText = value.join(", ");
-                    delete error['detail']
-                }
 
                 for (key in error) {
                     if ('detail' == key) {

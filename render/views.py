@@ -1,7 +1,6 @@
 import requests
 
 from blog.views import ValidateTokenView
-from blog.forms import FroalaBodyForm
 
 from rest_framework.reverse import reverse
 from rest_framework.request import Request
@@ -24,12 +23,4 @@ def test_blog(request,):
     if response.status_code != 200 or not response.data.get("valid", False):
         return redirect(reverse('login_page'))
     
-    
-    form = FroalaBodyForm()
-
-    context = {
-        'form': form,
-        'username': response.data.get("username")
-    }
-    
-    return render(request, 'index.html', context=context)
+    return render(request, 'index.html')

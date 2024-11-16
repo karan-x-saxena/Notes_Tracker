@@ -3,7 +3,7 @@ import json
 
 from django.http import HttpResponseRedirect
 from typing import Any
-from rest_framework import status, authentication, permissions, generics
+from rest_framework import status, authentication, permissions, generics, mixins
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -52,20 +52,48 @@ class NotesView(generics.ListCreateAPIView):
         queryset = Note.objects.none()
 
         if not title:
-            queryset = Note.objects.filter(author__username=username, is_head_note=True)
+            queryset = Note.objects.filter(disabled=False, author__username=username, is_head_note=True)
         
         else:
             try:
-                parent_note = Note.objects.get(title=title)
+                parent_note = Note.objects.get(title=title, disabled=False)
 
             except Note.DoesNotExist as e:
                 pass
 
             else:
-                queryset = Note.objects.filter(id__in=parent_note.child_notes)
+                queryset = Note.objects.filter(id__in=parent_note.child_notes, disabled=False)
 
         return queryset
 
+class UpdateDeleteNotesView(generics.GenericAPIView, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
+    lookup_field = 'title'
+
+    def put(self,request, *args , **kwargs):
+        return self.update(request, *args, **kwargs)
+    
+    
+    def perform_destroy(self, instance):
+        setattr(instance, 'disabled', True)
+        instance.save()
+    
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
+    
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+
+class SerachNoteView(generics.ListAPIView):
+    serializer_class = NoteSerializer
+
+    def get_queryset(self):
+        username = self.request.query_params.get('username', None)
+        title = self.request.query_params.get('title', None)
+        self.queryset = Note.objects.filter(title__icontains=title, author__username=username)
+        return super().get_queryset()
 
 class SubmitView(APIView):
 

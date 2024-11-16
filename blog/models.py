@@ -33,6 +33,8 @@ class Note(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(NoteTrackerUser, on_delete=models.CASCADE, related_name='notes')
     tags = models.ManyToManyField(Tag, related_name='notes')
+    disabled = models.BooleanField(default=False)
     is_head_note = models.BooleanField(default=False)
+    pin_note = models.BooleanField(default=False)
     child_notes = ArrayField(models.PositiveIntegerField(), default=[], blank=True)
 # Create your models here.

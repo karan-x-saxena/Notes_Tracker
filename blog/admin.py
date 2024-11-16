@@ -8,7 +8,7 @@ class NoteTrackerUserAdmin(UserAdmin):
 
 @admin.register(Note)
 class NoteAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['title', 'slug_heading', 'created_at', 'modified_at']
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
